@@ -77,11 +77,11 @@
                 </div>
 
                 <!-- Lançamento -->
-                <div style="position: relative; top: 80px; float: left; padding: 70px;" v-if="tab == 0">
+                <div style="position: relative; top: 80px; float: left;" v-if="tab == 0">
                   <h1>Musicas em lançamentos</h1>
                   <br>
                     <v-card class="d-inline-block mx-auto" v-for="music in music" v-bind:data="music"
-                    v-bind:key="music.nome" style="margin: 10px;display: flex;">
+                    v-bind:key="music.nome" style="display: flex;">
                         <v-container>
                           <v-row justify="space-between">
                             <v-col cols="auto">
