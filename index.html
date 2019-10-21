@@ -157,7 +157,7 @@
                               class="text-center pl-0"
                             >
                               <v-row
-                                class="flex-column ma-0 fill-height"
+                                class="flex-column ma-0 fill-1eight"
                                 justify="center"
                               >
                                 <v-col class="px-0">
@@ -187,7 +187,10 @@
         <div class="play">
           <v-progress-linear color="deep-purple accent-4" :value="progressBar" style="position: absolute; top: -4px; width: 100%; left: 0px;"></v-progress-linear>
           <div class="center">
-              <span style="padding: 15px; position: absolute; color: #fff; font-size: 1.2em; left: -10px;" > {{ musicPlay.nome }} </span>
+              <span style="padding: 15px; position: absolute; color: #fff; font-size: 1.2em; left: -10px;top: -58px;
+              background: #3f51b5;
+              border-radius: 5px;
+              z-index: -1;" > {{ musicPlay.nome }} </span>
             <v-btn class="mx-2" fab dark color="blue" style="position: relative; left: 50%; transform:translate(-50%)" v-if="!playing" @click="playM">
                 <v-icon dark>mdi-play</v-icon>
             </v-btn>
