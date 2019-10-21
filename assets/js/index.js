@@ -13,7 +13,6 @@ new Vue({
         tab: null,
         type_music: [
           {"type" : "Lançamento"},
-          {"type" : "Playlist"},
           {"type" : "Favoritos"}
         ],
         playing: false,
