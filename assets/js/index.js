@@ -28,6 +28,7 @@ new Vue({
         newMusic(banner, nome, album, time, banda, mp3){
           var newMusic = {banner: banner, nome: nome, album: album, time: time, banda: banda, mp3: mp3};
           this.music.push(newMusic);
+          this.favorit_music = localStorage.favorit_music ? JSON.parse(localStorage.favorit_music) : []
         },
         addMusic(){
           this.newMusic("https://img.discogs.com/4LpUtQvsNYUFTZElCylqHkafqCA=/fit-in/300x300/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/R-1979737-1379562813-9692.jpeg.jpg", "01. Iron Lion Zion", "Bob Marley greatest hits", 0, "Boby Marley", "https://github.com/PassaUmDollar/itunes_audio/blob/master/audio/01.%20Iron%20Lion%20Zion.mp3?raw=true");
@@ -74,7 +75,6 @@ new Vue({
             this.playing = true
             setInterval(() => {
               this.progressBar = Math.floor((100 / audio[0].duration) * audio[0].currentTime)
-              console.log(this.progressBar)
             }, 1000);
           } else{
           var audio = $("#player");  
@@ -96,11 +96,12 @@ new Vue({
           }
           if(!encontrou){
           this.favorit_music.push(musica)
+          this.tab = 1
           } else{
             var index = this.favorit_music.indexOf(musica);
             if (index !== -1) this.favorit_music.splice(index, 1);
           }
-          console.log(encontrou)
+          localStorage.favorit_music = JSON.stringify(this.favorit_music)
         }
       },
       props: {
