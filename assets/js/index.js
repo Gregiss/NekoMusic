@@ -6,7 +6,8 @@ new Vue({
         links: [
           {"name" : "Ínicio", "icon" : "mdi-home"},
           {"name" : "Músicas", "icon" : "mdi-music"},
-          {"name" : "Minhas músicas favoritas", "icon" : "mdi-star"}
+          {"name" : "Minhas músicas favoritas", "icon" : "mdi-star"},
+          {"name" : "Configuraçãoes", "icon" : "mdi-settings"}
         ],
         logo: "NekoMusic",
         music: [],
@@ -20,7 +21,10 @@ new Vue({
         musicPlay: {},
         audioElement: false,
         progressBar: 0,
-        where: 0
+        where: 0,
+        colorsHeader:  {"color" : "#3f51b5"},
+        colorsBody: {"color" : "#fff"}
+
       }),
       mounted(){
         this.addMusic()

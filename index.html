@@ -19,7 +19,6 @@
       <v-app id="inspire">
         <v-navigation-drawer
           style="z-index: 54;"
-          v-model="drawer"
           app>
           <v-list dense>
             <v-list-item v-for="link in links" @click="change(link)">
@@ -35,7 +34,6 @@
     
         <v-app-bar
           app
-          color="indigo"
           dark
           style="z-index: 52; box-shadow: 1px 1px 1px transparent !important;"
         >
@@ -271,6 +269,19 @@
                   </h1>
             </div>
             <!-- End favorito -->
+
+
+            <!-- Configurações -->
+            <div style="position: relative; top: 80px; text-align: center; padding-bottom: 90px;" v-if="where == 3">
+              <h1>Configurações</h1>
+              <h2>Mude as cores</h2>
+              <br>
+              <h2>Header e Bottom</h2>
+              <div class="d-flex justify-center">
+                <v-color-picker value="#3f51b5" v-bind="colorsHeader"></v-color-picker>
+              </div>
+            </div>
+            <!-- End Configurações -->
 
                 <!-- End Home -->
               </v-col>
