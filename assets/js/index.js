@@ -10,6 +10,7 @@ new Vue({
         ],
         logo: "NekoMusic",
         music: [],
+        favorit_music: [],
         tab: null,
         type_music: [
           {"type" : "Lançamento"},
@@ -85,6 +86,21 @@ new Vue({
           var audio = $("#player");  
           audio[0].pause()
           this.playing = false
+        },
+        favorite(musica){
+          var encontrou = false
+          for(var i = 0; i < this.favorit_music.length; i++){
+            if(this.favorit_music[i] == musica){
+              encontrou = true
+            }
+          }
+          if(!encontrou){
+          this.favorit_music.push(musica)
+          } else{
+            var index = this.favorit_music.indexOf(musica);
+            if (index !== -1) this.favorit_music.splice(index, 1);
+          }
+          console.log(encontrou)
         }
       },
       props: {

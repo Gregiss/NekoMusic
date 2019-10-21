@@ -83,7 +83,7 @@
               
 
                 <!-- Lançamento -->
-                <div style="position: relative; top: 80px; float: left; padding-bottom: 90px;" v-if="tab == 0">
+                <div style="position: relative; top: 80px; text-align: center; padding-bottom: 90px;" v-if="tab == 0">
                   <h1>Musicas em lançamentos</h1>
                   <br>
                     <v-card class="d-inline-block mx-auto" v-for="music in music" v-bind:data="music"
@@ -116,13 +116,8 @@
                               >
                                 <v-col class="px-0">
                                   <v-btn icon @click="favorite(music)">
-                                    <v-icon>mdi-heart</v-icon>
-                                  </v-btn>
-                                </v-col>
-                    
-                                <v-col class="px-0">
-                                  <v-btn icon @click="bookmark(music)">
-                                    <v-icon>mdi-bookmark</v-icon>
+                                    <v-icon v-if="favorit_music.find((favorit_music) => favorit_music.nome === music.nome)" style="color: red;">mdi-heart</v-icon>
+                                    <v-icon v-else="">mdi-heart</v-icon>
                                   </v-btn>
                                 </v-col>
   
@@ -133,6 +128,55 @@
                       </v-card>
               </div>
                 <!-- End Lançamento -->
+
+                <!-- Favorito -->
+                <div style="position: relative; top: 80px; text-align: center; padding-bottom: 90px;" v-if="tab == 1">
+                  <h1>Musicas favoritas</h1>
+                  <br>
+                    <v-card class="d-inline-block mx-auto" v-for="music in favorit_music" style="display: flex; margin: 20px;">
+                        <v-container>
+                          <v-row justify="space-between">
+                            <v-col cols="auto">
+                              <v-img
+                                height="200"
+                                width="200"
+                                :src="music.banner"
+                              >
+                              <div class="ok" @click="play(music)">
+                                <v-btn class="mx-2" fab dark color="blue" style="position: relative; left: 50%; transform:translate(-50%)">
+                                  <v-icon dark>mdi-play</v-icon>
+                              </v-btn>
+                              </div>
+                            </v-img>
+                              <br>
+                              <span>{{ music.nome }}</span>
+                            </v-col>
+                    
+                            <v-col
+                              cols="auto"
+                              class="text-center pl-0"
+                            >
+                              <v-row
+                                class="flex-column ma-0 fill-height"
+                                justify="center"
+                              >
+                                <v-col class="px-0">
+                                  <v-btn icon @click="favorite(music)">
+                                    <v-icon v-if="favorit_music.find((favorit_music) => favorit_music.nome === music.nome)" style="color: red;">mdi-heart</v-icon>
+                                    <v-icon v-else="">mdi-heart</v-icon>
+                                  </v-btn>
+                                </v-col>
+  
+                              </v-row>
+                            </v-col>
+                          </v-row>
+                        </v-container>
+                      </v-card>
+                      <h1 v-if="favorit_music.length == 0">
+                        Nenhuma música em favorito
+                      </h1>
+              </div>
+                <!-- End favorito -->
 
                 <!-- End Home -->
               </v-col>
