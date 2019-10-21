@@ -19,7 +19,8 @@ new Vue({
         playing: false,
         musicPlay: {},
         audioElement: false,
-        progressBar: 0
+        progressBar: 0,
+        where: 0
       }),
       mounted(){
         this.addMusic()
@@ -98,10 +99,14 @@ new Vue({
           this.favorit_music.push(musica)
           this.tab = 1
           } else{
-            var index = this.favorit_music.indexOf(musica);
+            var index = this.favorit_music.indexOf(musica)
             if (index !== -1) this.favorit_music.splice(index, 1);
           }
           localStorage.favorit_music = JSON.stringify(this.favorit_music)
+        },
+        change(link){
+          var index = this.links.indexOf(link)
+          this.where = index
         }
       },
       props: {
