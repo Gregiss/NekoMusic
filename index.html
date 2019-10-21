@@ -18,6 +18,7 @@
     <template>
       <v-app id="inspire">
         <v-navigation-drawer
+
           style="z-index: 54;"
           v-model="drawer"
           app>
@@ -51,8 +52,11 @@
               <v-col class="text-center">
                 <!-- Home -->
                 <div class="home">
+                    <v-app-bar
+                    style="z-index: 52; box-shadow: 1px 1px 1px transparent !important;" 
+                    hide-on-scroll>
                         <v-tabs
-                          style="top: 50px; position: fixed; width: 100%; left: 0px; z-index: 50;"
+                          style="top: -20px; position: fixed; width: 120%; left: 0px; z-index: 50;"
                           v-model="tab"
                           background-color="indigo"
                           centered
@@ -74,7 +78,9 @@
                             :value="'tab-' + i" >
                           </v-tab-item>
                         </v-tabs-items>
+                      </v-app-bar>
                 </div>
+              
 
                 <!-- Lançamento -->
                 <div style="position: relative; top: 80px; float: left; padding-bottom: 90px;" v-if="tab == 0">
