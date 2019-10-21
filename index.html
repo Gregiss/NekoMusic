@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <meta charset="UTF-8">
+  <title>NekoMusic</title>
+</head>
+<body>
+  <div id="app">
+    <template>
+      <v-app id="inspire">
+        <v-navigation-drawer
+          style="z-index: 51;"
+          v-model="drawer"
+          app>
+          <v-list dense>
+            <v-list-item @click="" v-for="link in links" v-bind:data="link"
+            v-bind:key="link.name">
+              <v-list-item-action>
+                <v-icon>{{ link.icon }}</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>{{ link.name }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-navigation-drawer>
+    
+        <v-app-bar
+          app
+          color="indigo"
+          dark
+          style="z-index: 52; box-shadow: 1px 1px 1px transparent !important;"
+        >
+          <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+          <v-toolbar-title>{{ logo }}</v-toolbar-title>
+        </v-app-bar>
+    
+        <v-content>
+          <v-container
+            fluid>
+            <v-row>
+              <v-col class="text-center">
+                <!-- Home -->
+                <div class="home">
+                        <v-tabs
+                          style="top: 50px; position: fixed; width: 100%; left: 0px; z-index: 50;"
+                          v-model="tab"
+                          background-color="indigo"
+                          centered
+                          dark
+                          icons-and-text>
+                          <v-tabs-slider></v-tabs-slider>
+                    
+                          <v-tab v-for="music in type_music" v-bind:data="music"
+                          v-bind:key="music.type">
+                            {{ music.type }}
+                          </v-tab>
+      
+                        </v-tabs>
+                    
+                        <v-tabs-items v-model="tab">
+                          <v-tab-item
+                            v-for="i in 3"
+                            :key="i"
+                            :value="'tab-' + i" >
+                          </v-tab-item>
+                        </v-tabs-items>
+                </div>
+
+                <!-- Lançamento -->
+                <div style="position: relative; top: 80px; float: left; padding: 70px;" v-if="tab == 0">
+                  <h1>Musicas em lançamentos</h1>
+                  <br>
+                    <v-card class="d-inline-block mx-auto" v-for="music in music" v-bind:data="music"
+                    v-bind:key="music.nome" style="margin: 10px;display: flex;">
+                        <v-container>
+                          <v-row justify="space-between">
+                            <v-col cols="auto">
+                              <v-img
+                                height="200"
+                                width="200"
+                                :src="music.banner"
+                              >
+                              <div class="ok" @click="play(music)">
+                                <v-btn class="mx-2" fab dark color="blue" style="position: relative; left: 50%; transform:translate(-50%)">
+                                  <v-icon dark>mdi-play</v-icon>
+                              </v-btn>
+                              </div>
+                            </v-img>
+                              <br>
+                              <span>{{ music.nome }}</span>
+                            </v-col>
+                    
+                            <v-col
+                              cols="auto"
+                              class="text-center pl-0"
+                            >
+                              <v-row
+                                class="flex-column ma-0 fill-height"
+                                justify="center"
+                              >
+                                <v-col class="px-0">
+                                  <v-btn icon @click="favorite(music)">
+                                    <v-icon>mdi-heart</v-icon>
+                                  </v-btn>
+                                </v-col>
+                    
+                                <v-col class="px-0">
+                                  <v-btn icon @click="bookmark(music)">
+                                    <v-icon>mdi-bookmark</v-icon>
+                                  </v-btn>
+                                </v-col>
+  
+                              </v-row>
+                            </v-col>
+                          </v-row>
+                        </v-container>
+                      </v-card>
+              </div>
+                <!-- End Lançamento -->
+
+                <!-- End Home -->
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-content>
+
+        <div class="play">
+          <v-progress-linear color="deep-purple accent-4" :value="progressBar" style="position: absolute; top: -4px; width: 100%; left: 0px;"></v-progress-linear>
+          <div class="center">
+              <span style="padding: 15px; position: absolute; color: #fff; font-size: 1.2em; left: -10px;" > {{ musicPlay.nome }} </span>
+            <v-btn class="mx-2" fab dark color="blue" style="position: relative; left: 50%; transform:translate(-50%)" v-if="!playing" @click="playM">
+                <v-icon dark>mdi-play</v-icon>
+            </v-btn>
+            <v-btn class="mx-2" fab dark color="blue" style="position: relative; left: 50%; transform:translate(-50%)" v-else="" @click="pauseM">
+                <v-icon dark>mdi-pause</v-icon>
+            </v-btn>
+          </div>
+        </div>
+
+        <div id="audio">
+          <audio controls id="player">
+            <source src="" type="audio/mpeg">
+            Your browser does not support the audio tag.
+          </audio>
+        </div>
+        
+    
+      </v-app>
+    </template>
+  </div>
+
+  <script src="./assets/js/howler.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script src="./assets/js/index.js"></script>
+</body>
