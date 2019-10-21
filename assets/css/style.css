@@ -81,3 +81,7 @@ audio{
     top: 35%;
     transform: translate(-50%);
 }
+
+.v-toolbar{
+    background: #3f51b5 !important;
+}
